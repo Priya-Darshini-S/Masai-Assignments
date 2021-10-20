@@ -14,7 +14,7 @@ function append(data, container){
         let div = document.createElement("div");
         let title = document.createElement("h2");
         title.innerText = data.strMeal;
-        title.setAttribute("style", "text-align: center")
+        title.setAttribute("style", "text-align: center");
         
         let image = document.createElement("div");
         image.setAttribute("class", "image");
