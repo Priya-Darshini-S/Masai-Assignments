@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home page</title>
+    
+   
+</head>
+<link rel="stylesheet" href="styles/style.css">
+<body>
+    <div id="header"></div>
+    <div id="search_tab">
+        <input type="text" id="food" placeholder="Enter the food name" />
+        <span><button id="search_food">Search</button></span>
+    </div>
+    
+    <div id="display"></div>
+</body>
+</html>
+
+<script type="module">
+
+
+    import navbar from "./components/navbar.js";
+    import {getData, append} from "/scripts/script.js";
+
+//console.log('navbar:', navbar);
+  let head = document.getElementById("header");
+  header.innerHTML = navbar();
+  
+let searching = document.getElementById("search_food");
+searching.addEventListener("click", receipe_search);
+
+let display = document.getElementById("display");
+function receipe_search(){
+   // alert("works");
+    display.innerHTML = null;
+    display.innerText = null;
+
+    let food = document.getElementById("food").value;
+    console.log('food:', food);
+    let response = getData(`https://www.themealdb.com/api/json/v1/1/search.php?s=${food}`);
+    //console.log('response:', response)
+    response.then((res) => {
+                console.log('res:', res.meals[0])
+                 let data = res.meals[0];
+               //  console.log('data:', data.idMeal)
+
+              
+                append(data, display);
+          })
+          .catch((err) => {
+              console.log('err:', err);
+              display.innerHTML = null;
+              display.innerText = "OOPS....! Receipe not fount, Try someother Receipe";
+
+          })
+}
+
+
+</script>
