@@ -11,29 +11,49 @@
 <link rel="stylesheet" href="styles/style.css">
 <body>
     <div id="header"></div>
- 
+    <span><button id="search">NEXT</button></span>
     <div id="container"></div>
 </body>
 </html>
-<script type="module">
-    import navbar from "./components/navbar.js";
 
-    //import {getData, append} from "/scripts/showData.js";
+<script type="module">
+
+
+    import navbar from "./components/navbar.js";
+    import {getData, append} from "/scripts/script.js";
 
 //console.log('navbar:', navbar);
   let head = document.getElementById("header");
-  
+  header.innerHTML = navbar();
 
-header.innerHTML = navbar();
+  let display = document.getElementById("container");
+  receipe_search();
   
-// let response = getData('https://fakestoreapi.com/products/category/electronics');
-//           response
-//           .then((res) => {
-//             let container = document.getElementById("container");
-//             append(res, container);
-//       })
-//       .catch((err) => {
-//           console.log('err:', err);
+let searching = document.getElementById("search");
+searching.addEventListener("click", receipe_search);
 
-//       })
+function receipe_search(){
+   // alert("works");
+    display.innerHTML = null;
+    display.innerText = null;
+
+    let response = getData(`https://www.themealdb.com/api/json/v1/1/random.php`);
+    //console.log('response:', response)
+    response.then((res) => {
+                console.log('res:', res.meals[0])
+                 let data = res.meals[0];
+               //  console.log('data:', data.idMeal)
+
+              
+                append(data, display);
+          })
+          .catch((err) => {
+              console.log('err:', err);
+              display.innerHTML = null;
+              display.innerText = "OOPS....! Receipe not fount, Try someother Receipe";
+
+          })
+}
+
+
 </script>
