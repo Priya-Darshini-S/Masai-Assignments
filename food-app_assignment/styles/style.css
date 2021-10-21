@@ -73,3 +73,24 @@ img {
     font-size: 25px;
     margin: 1% 0% 0% 90%;
 }
+
+#latest_display {
+    margin-top: 2%;
+    display: grid;
+    grid-template-columns: repeat(4, 23%);
+    gap: 2.6%;
+}
+#latest_display > div {
+margin-bottom: 20px;
+border: 1px solid black;
+text-align: center;
+}
+.lat_image {
+ width: 90%;
+ height: 200px;
+ margin: auto;
+}
+.lat_img {
+    width: 100%;
+    height : 200px;
+}
