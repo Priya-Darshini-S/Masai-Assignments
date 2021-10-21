@@ -4,36 +4,43 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Latest Receipe page</title>
+    <title>Day's-Receipe page</title>
     
    
 </head>
 <link rel="stylesheet" href="styles/style.css">
 <body>
     <div id="header"></div>
- 
-    <div id="container"></div>
+   
+    <div id="latest_display"></div>
 </body>
 </html>
-<script type="module">
-    import navbar from "./components/navbar.js";
 
-    //import {getData, append} from "/scripts/showData.js";
+<script type="module">
+
+
+    import navbar from "./components/navbar.js";
+    import {getData, append} from "/scripts/script2.js";
 
 //console.log('navbar:', navbar);
   let head = document.getElementById("header");
+  header.innerHTML = navbar();
+
+  let display = document.getElementById("latest_display");
   
 
-header.innerHTML = navbar();
-  
-// let response = getData('https://fakestoreapi.com/products/category/electronics');
-//           response
-//           .then((res) => {
-//             let container = document.getElementById("container");
-//             append(res, container);
-//       })
-//       .catch((err) => {
-//           console.log('err:', err);
+    let response = getData(`https://www.themealdb.com/api/json/v1/1/categories.php`);
+    response.then((res) => {
+                    let data = res.categories;
+              console.log('data:', data);
+                   
+                        append(data, display);
+          })
+          .catch((err) => {
+              console.log('err:', err);
+              display.innerHTML = null;
+              display.innerText = "OOPS....! Receipe not fount, Try someother Receipe";
 
-//       })
+          })
+
 </script>
