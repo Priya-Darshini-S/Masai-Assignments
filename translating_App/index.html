@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        #maincont {
+            background-color: #242526;
+            width: 95%;
+            margin: auto;
+            margin-top: 4%;
+            text-align: center;
+
+        }
+        #Box, #Box2{
+            height: 200px;
+            width: 300px;
+            margin: 0% 1%;
+        }
+        #head {
+         height: 25px;
+         background-color: #cc99cc;
+        }
+       button {
+           border: 2px solid black;
+           background-color: #cc99cc;
+           border-radius: 5px;
+       }
+       #bttns {
+           width: 20%;
+           margin: auto;
+           height: 60px;
+       }
+    </style>
+</head>
+
+<body>
+    <div id="maincont">
+        <br/>
+        <div id="head">
+            <label for="lang">Select language</label></div>
+        <select name="lang" id="Langs" onchange="getTheValu()"></select>
+        <br>
+        <br>
+        <textarea id="Box" rows="10" cols="50">
+
+        </textarea>
+        <textarea id="Box2" rows="10" cols="50">
+
+        </textarea>
+        <br>
+        <div id="bttns">
+            <button onclick="getthevalu()">Click to Translate</button>
+            <button onclick="textToAudio()">Click to Listen</button>
+        </div>
+      
+
+    </div>
+</body>
+<script src="server.js"></script>
+<script src="speech_rec.js"></script>
+<script src="speech.js"></script>
+</body>
+</html>
