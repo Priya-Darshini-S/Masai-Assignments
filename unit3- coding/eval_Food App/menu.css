@@ -1,0 +1,15 @@
+body{
+    color: white;
+}
+.cont1 {
+    color: black;
+}
+#display {
+    width: 90%;
+    margin: auto;
+    border: 2px solid white;
+    border-radius: 5px;
+    display: grid;
+    grid-template-columns: repeat(4, 24%);
+    grid-gap: 2%;
+}
