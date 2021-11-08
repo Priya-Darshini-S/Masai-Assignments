@@ -1,0 +1,35 @@
+body{
+    color: white;
+}
+.cont1 {
+    color: black;
+}
+#signup_blk, #login_blk {
+    width: 50%;
+    margin: auto;
+    border: 2px solid white;
+    border-radius: 5px;
+}
+h1 {
+    text-align: center;
+}
+form {
+    display: flex;
+    flex-direction: column;
+}
+input {
+    width: 60%;
+    margin: auto;
+    padding: 5px;
+    font-size: 20px;
+    margin-top: 2%;
+}
+button {
+    width: 30%;
+    margin: auto;
+    background-color: white;
+    margin-top: 2%;
+    margin-bottom: 2%;
+    height: 40px;
+    font-size: 30px;
+}

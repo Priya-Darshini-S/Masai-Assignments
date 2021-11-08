@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign up</title>
+    <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="signup_style.css" />
+</head>
+<body>
+    <div><br/></div>
+    <div id="navbar">
+    <div class="cont1"><h2>MASAI FOODS</h2></div>
+    <div class="cont2">
+        <div><a href= "">Menu</a></div>
+        <div><a href= "">Login</a></div>
+        <div><a href= "/signup.html">Sign Up</a></div>  
+    </div>
+    </div>
+    <br/>
+    <br/>
+    <div id="login_blk">
+     <h1>Login here</h1>
+     <form onsubmit="login(event)" id="login_frm">
+        <input type = "text" id="login_u_name" placeholder="Enter your Username"/>
+        <input type = "password" id="login_pass" placeholder="Enter your Password"/>
+        <button>Submit</button>
+    </form>
+    </div>
+    <br/>
+    <br/>
+    
+</body>
+</html>
+<script>
+     function login(e)
+    {
+        e.preventDefault()
+        let form = document.getElementById("login_frm");
+
+        let user_data = 
+        {
+            password: form.login_u_name.value,
+            username: form.login_pass.value,
+        };
+
+        let data_to_send = JSON.stringify(user_data);
+        //console.log("data_to_send:", data_to_send);
+
+        fetch("https://masai-api-mocker.herokuapp.com/auth/login", {
+            method: "POST",
+            body: data_to_send,
+
+            headers: {
+                "Content-Type": "application/json",
+            },
+        })
+        .then((res) => {
+            return res.json();
+        })
+        .then((res)=> {
+            console.log("res:", res);
+            fetchmyData(user_data.username, res.token);
+        })
+        .catch((err)=> {
+            console.log("err:", err);
+        });
+    }
+
+    function fetchmyData(username, token)
+    {
+        fetch(`https://masai-api-mocker.herokuapp.com/user/${username}`, {
+            headers: {
+                "Content-Type": "application/json",
+                Authorization: `Bearer ${token}`,
+            },
+        })
+        .then((res) => {
+            return res.json();
+        })
+        .then((res)=> {
+            console.log("res:", res);
+            console.log('res:', res.name);
+             local_storage(res.name);
+           
+
+           window.location.href = "menu.html";
+        })
+        .catch((err)=> {
+            console.log("err:", err);
+        });
+    }
+    
+    function local_storage(p){
+    
+           
+           let products_menu = JSON.parse(localStorage.getItem("food_user"));
+           if(products_menu.length != 0){
+            products_menu.pop();
+           }
+           products_menu.push(p);
+              localStorage.setItem("food_user", JSON.stringify(products_menu));
+
+    console.log('products_menu:', products_menu)
+  }
+
+</script>

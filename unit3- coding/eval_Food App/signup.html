@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign up</title>
+    <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="signup_style.css" />
+</head>
+<body>
+    <div><br/></div>
+    <div id="navbar">
+    <div class="cont1"><h2>MASAI FOODS</h2></div>
+    <div class="cont2">
+        <div><a href= "">Menu</a></div>
+        <div><a href= "">Login</a></div>
+        <div><a href= "/signup.html">Sign Up</a></div>  
+    </div>
+    </div>
+    <br/>
+    <br/>
+    <div id="signup_blk">
+     <h1>Sign Up here</h1>
+     <form onsubmit="Signup(event)" id="signup_frm">
+        <input type = "text" id="name" placeholder="Enter your Name"/>
+        <input type = "mail" id="email" placeholder="Enter your Email"/>
+        <input type = "password" id="pass" placeholder="Enter your Password"/>
+        <input type = "text" id="u_name" placeholder="Enter your Username"/>
+        <input type = "number" id="nmbr" placeholder="Enter your Mobile Number"/>
+        <input type = "text" id="descp" placeholder="Write a small Description"/>
+        <button>Submit</button>
+    </form>
+    </div>
+    <br/>
+    <br/>
+    
+</body>
+</html>
+<script>
+    if(localStorage.getItem("food_user") === null){
+        localStorage.setItem("food_user", JSON.stringify([]));
+    }
+    function Signup(e){
+        e.preventDefault();
+        let form = document.getElementById("signup_frm");
+
+        let user_data = {
+            name: form.name.value,
+            email: form.email.value,
+            password: form.pass.value,
+            username: form.u_name.value,
+            mobile: form.nmbr.value,
+            description: form.descp.value,
+        };
+user_data = JSON.stringify(user_data);
+fetch("https://masai-api-mocker.herokuapp.com/auth/register", {
+    method: "POST",
+    body: user_data,
+    headers: {
+        "Content-Type": "application/json",
+    },
+})
+.then((res)=> {
+    return res.json();
+})
+.then((res)=> {
+    console.log("res:", res);
+    window.location.href = "login.html";
+})
+.catch((err)=> {
+    console.log("err:", err);
+});
+}
+</script>
